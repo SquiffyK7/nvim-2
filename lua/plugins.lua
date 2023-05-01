@@ -6,6 +6,11 @@ function M.setup()
 
   -- packer.nvim configuration
   local conf = {
+    profile = {
+      enable = true,
+      threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+    },
+
     display = {
       open_fn = function()
         return require('packer.util').float { border = 'rounded' }
@@ -55,6 +60,7 @@ function M.setup()
     -- Git
     use {
       'TimUntersberger/neogit',
+      cmd = 'Neogit',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
         require('config.neogit').setup()
@@ -62,12 +68,43 @@ function M.setup()
     }
 
     -- WhichKey
-		--
     use {
       'folke/which-key.nvim',
       config = function()
         require('config.whichkey').setup()
       end,
+    }
+
+    -- Load only when require
+    use { 'nvim-lua/plenary.nvim', module = 'plenary' }
+
+    -- Better icons
+    use {
+      'kyazdani42/nvim-web-devicons',
+      module = 'nvim-web-devicons',
+      config = function()
+        require('nvim-web-devicons').setup { default = true }
+      end,
+    }
+
+    -- Better Comment
+    use {
+      'numToStr/Comment.nvim',
+      opt = true,
+      keys = { 'gc', 'gcc', 'gbc' },
+      config = function()
+        require('Comment').setup {}
+      end,
+    }
+
+    -- Markdown
+    use {
+      "iamcco/markdown-preview.nvim",
+      run = function()
+        vim.fn["mkdp#util#install"]()
+      end,
+      ft = "markdown",
+      cmd = { "MarkdownPreview" },
     }
 
     if packer_bootstrap then
