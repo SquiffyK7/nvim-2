@@ -21,6 +21,10 @@ opt.signcolumn = 'yes' -- Always show sign column
 opt.clipboard = 'unnamedplus' -- Access system clipboard
 opt.timeoutlen = 300 -- Time in milliseconds to wait for a mapped sequence to complete.
 opt.laststatus = 3 -- show shared statusline accross windows
+opt.path:remove '/usr/include'
+opt.path:append '**'
+opt.wildignorecase = true
+opt.wildignore:append '**/node_modules/*'
 
 -- Highlight on yank
 vim.cmd [[
