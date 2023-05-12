@@ -169,9 +169,19 @@ function M.setup()
     use {
       'akinsho/nvim-bufferline.lua',
       event = 'BufReadPre',
-      wants = 'nvim-web-devicons',
       config = function()
         require('config.bufferline').setup()
+      end,
+    }
+
+    -- Motion
+    use {
+      'unblevable/quick-scope',
+      config = function()
+        -- disable in quickfix mode
+        vim.cmd [[
+					let g:qs_filetype_blacklist = ['qf'] 
+				]]
       end,
     }
 
