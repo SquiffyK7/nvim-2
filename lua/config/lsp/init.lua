@@ -29,7 +29,11 @@ local servers = {
   tsserver = {},
 }
 
-local opts = {}
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+local opts = {
+  capabilities = capabilities,
+}
 
 function M.setup()
   require('config.lsp.installer').setup(servers, opts)
