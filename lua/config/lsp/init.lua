@@ -29,7 +29,15 @@ local servers = {
   tsserver = {},
 }
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local lsp_signature = require 'lsp_signature'
+lsp_signature.setup {
+  bind = true,
+  handler_opts = {
+    border = 'rounded',
+  },
+}
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local opts = {
   capabilities = capabilities,

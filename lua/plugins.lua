@@ -222,21 +222,21 @@ function M.setup()
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
+        'ray-x/lsp_signature.nvim',
       },
     }
 
-
     -- Completion
-		use {
-			"hrsh7th/nvim-cmp",
-			event = "InsertEnter",
-			config = function()
-				require("config.cmp").setup()
-			end,
-			requires = {
-				"hrsh7th/cmp-nvim-lsp",
-			},
-		}
+    use {
+      'hrsh7th/nvim-cmp',
+      event = 'InsertEnter',
+      config = function()
+        require('config.cmp').setup()
+      end,
+      requires = {
+        'hrsh7th/cmp-nvim-lsp',
+      },
+    }
 
     if packer_bootstrap then
       print 'Restart Neovim required after installation!'
