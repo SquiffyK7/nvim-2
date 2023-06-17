@@ -137,6 +137,7 @@ function M.setup()
 
     use {
       'nvim-treesitter/nvim-treesitter',
+      event = 'BufRead',
       run = ':TSUpdate',
       config = function()
         require('config.treesitter').setup()
@@ -192,6 +193,31 @@ function M.setup()
 					let g:qs_filetype_blacklist = ['qf'] 
 				]]
       end,
+    }
+
+    -- Auto pairs
+    use {
+      'windwp/nvim-autopairs',
+      config = function()
+        require('nvim-autopairs').setup {
+          map_cr = true,
+          check_ts = true,
+        }
+      end,
+    }
+
+    -- Auto tag
+    use {
+      'windwp/nvim-ts-autotag',
+      requires = 'nvim-treesitter/nvim-treesitter',
+      after = 'nvim-treesitter',
+    }
+
+    -- End wise
+    use {
+      'RRethy/nvim-treesitter-endwise',
+      requires = 'nvim-treesitter/nvim-treesitter',
+      after = 'nvim-treesitter',
     }
 
     if packer_bootstrap then
