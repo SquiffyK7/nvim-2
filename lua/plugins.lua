@@ -41,6 +41,15 @@ function M.setup()
   local function plugins(use)
     use { 'wbthomason/packer.nvim' }
 
+    -- Notification
+    use {
+      'rcarriga/nvim-notify',
+      event = 'VimEnter',
+      config = function()
+        vim.notify = require 'notify'
+      end,
+    }
+
     -- Colorscheme
     use {
       'sainnhe/everforest',
