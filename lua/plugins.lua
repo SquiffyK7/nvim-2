@@ -211,6 +211,20 @@ function M.setup()
       after = 'nvim-treesitter',
     }
 
+    -- LSP
+    use {
+      'neovim/nvim-lspconfig',
+      event = 'BufReadPre',
+      config = function()
+        require('config.lsp').setup()
+      end,
+      requires = {
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+      },
+    }
+
     if packer_bootstrap then
       print 'Restart Neovim required after installation!'
       require('packer').sync()
