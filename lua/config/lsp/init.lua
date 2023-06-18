@@ -29,21 +29,20 @@ local servers = {
   tsserver = {},
 }
 
-local lsp_signature = require 'lsp_signature'
-lsp_signature.setup {
-  bind = true,
-  handler_opts = {
-    border = 'rounded',
-  },
-}
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-local opts = {
-  capabilities = capabilities,
-}
-
 function M.setup()
+	local lsp_signature = require 'lsp_signature'
+	lsp_signature.setup {
+		bind = true,
+		handler_opts = {
+			border = 'rounded',
+		},
+	}
+
+	local capabilities = require('cmp_nvim_lsp').default_capabilities()
+	local opts = {
+		capabilities = capabilities,
+	}
+
   require('config.lsp.installer').setup(servers, opts)
 
   -- Use LspAttach autocommand to only map the following keys

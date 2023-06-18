@@ -1,15 +1,20 @@
 local M = {}
 
 function M.setup()
-  local cmp = require 'cmp'
-
   local has_words_before = function()
-    unpack = unpack or table.unpack
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
   end
 
+  local luasnip = require 'luasnip'
+  local cmp = require 'cmp'
+
   cmp.setup {
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
     window = {
       -- completion = cmp.config.window.bordered(),
       documentation = {
@@ -17,67 +22,108 @@ function M.setup()
         winhighlight = 'NormalFloat:NormalFloat,FloatBorder:TelescopeBorder',
       },
     },
-    mapping = cmp.mapping.preset.insert {
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-      ['<CR>'] = cmp.mapping.confirm {
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = true,
+    mapping = {
+      -- C-p?
+      ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+      -- C-n?
+      ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-e>'] = cmp.mapping { i = cmp.mapping.close(), c = cmp.mapping.close() },
+      ['<CR>'] = cmp.mapping {
+        i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+        c = function(fallback)
+          if cmp.visible() then
+            cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+          else
+            fallback()
+          end
+        end,
       },
-      ['<Tab>'] = function(fallback)
-        if not cmp.select_next_item() then
-          if vim.bo.buftype ~= 'prompt' and has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
+      -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#super-tab-like-mapping
+      ['<Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
         end
-      end,
-
-      ['<S-Tab>'] = function(fallback)
-        if not cmp.select_prev_item() then
-          if vim.bo.buftype ~= 'prompt' and has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
+      end, {
+        'i',
+        's',
+        'c',
+      }),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
         end
-      end,
-
-      ['<C-e>'] = cmp.mapping.abort(),
-      -- ['<CR>'] = cmp.mapping.confirm { select = true }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      end, {
+        'i',
+        's',
+        'c',
+      }),
     },
-
-    snippet = {
-      -- We recommend using *actual* snippet engine.
-      -- It's a simple implementation so it might not work in some of the cases.
-      expand = function(args)
-        unpack = unpack or table.unpack
-        local line_num, col = unpack(vim.api.nvim_win_get_cursor(0))
-        local line_text = vim.api.nvim_buf_get_lines(0, line_num - 1, line_num, true)[1]
-        local indent = string.match(line_text, '^%s*')
-        local replace = vim.split(args.body, '\n', true)
-        local surround = string.match(line_text, '%S.*') or ''
-        local surround_end = surround:sub(col)
-
-        replace[1] = surround:sub(0, col - 1) .. replace[1]
-        replace[#replace] = replace[#replace] .. (#surround_end > 1 and ' ' or '') .. surround_end
-        if indent ~= '' then
-          for i, line in ipairs(replace) do
-            replace[i] = indent .. line
-          end
-        end
-
-        vim.api.nvim_buf_set_lines(0, line_num - 1, line_num, true, replace)
-      end,
-    },
-
     sources = {
       { name = 'nvim_lsp' },
-      -- { name = "treesitter" }, found out what this is
+      { name = 'treesitter' },
+      { name = 'buffer' },
+      { name = 'luasnip' },
+      { name = 'nvim_lua' },
+      { name = 'path' },
+      { name = 'spell' },
+      { name = 'emoji' },
+      { name = 'calc' },
+    },
+    completion = { completeopt = 'menu,menuone,noinsert', keyword_length = 1 },
+    experimental = { native_menu = false, ghost_text = false },
+    formatting = {
+      format = function(entry, vim_item)
+        vim_item.menu = ({
+          nvim_lsp = '[LSP]',
+          buffer = '[Buffer]',
+          luasnip = '[Snip]',
+          nvim_lua = '[Lua]',
+          treesitter = '[Treesitter]',
+        })[entry.source.name]
+        return vim_item
+      end,
     },
   }
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
+    }, {
+      { name = 'buffer' },
+    }),
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' },
+    },
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' },
+    }, {
+      { name = 'cmdline' },
+    }),
+  })
 
   -- To insert `(` after select function or method item
   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
