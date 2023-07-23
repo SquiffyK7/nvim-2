@@ -164,7 +164,28 @@ function M.setup()
       end,
     }
 
-    use { 'nvim-telescope/telescope.nvim', module = 'telescope', as = 'telescope' }
+    use {
+      'nvim-telescope/telescope.nvim',
+      module = 'telescope',
+      cmd = { 'Telescope' },
+      config = function()
+        require('config.telescope').setup()
+      end,
+			requires = {
+				"nvim-lua/popup.nvim",
+				"nvim-lua/plenary.nvim",
+				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+				"nvim-telescope/telescope-project.nvim",
+				"cljoly/telescope-repo.nvim",
+				"nvim-telescope/telescope-file-browser.nvim",
+				{
+					"ahmedkhalf/project.nvim",
+					config = function()
+						require("project_nvim").setup {}
+					end,
+				},
+			},
+    }
 
     -- Buffer line
     use {

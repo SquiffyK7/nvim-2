@@ -45,12 +45,26 @@ function M.setup()
 
     f = {
       name = 'Find',
-      f = { "<cmd>lua require('utils.finder').find_files()<cr>", 'Files' },
-      b = { "<cmd>lua require('utils.finder').find_buffers()<cr>", 'Buffers' },
-      o = { '<cmd>FzfLua oldfiles<cr>', 'Old files' },
-      g = { '<cmd>FzfLua live_grep<cr>', 'Live grep' },
-      c = { '<cmd>FzfLua commands<cr>', 'Commands' },
+      f = { require('utils.finder').find_files, 'Files' },
+      d = { require('utils.finder').find_dotfiles, 'Dotfiles' },
+      b = { '<cmd>Telescope buffers<cr>', 'Buffers' },
+      o = { '<cmd>Telescope oldfiles<cr>', 'Old Files' },
+      g = { '<cmd>Telescope live_grep<cr>', 'Live Grep' },
+      c = { '<cmd>Telescope commands<cr>', 'Commands' },
+      r = { '<cmd>Telescope file_browser<cr>', 'Browser' },
+      w = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Current Buffer' },
       e = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
+    },
+
+    p = {
+      name = 'Project',
+      p = {
+        function()
+          require('telescope').extensions.project.project {}
+        end,
+        'List',
+      },
+      s = { '<cmd>Telescope repo list<cr>', 'Search' },
     },
   }
 
