@@ -232,6 +232,7 @@ function M.setup()
 		}
 
 		use 'tpope/vim-surround'
+		use 'chaoren/vim-wordmotion'
 
 		use {
 			'gbprod/cutlass.nvim',
