@@ -2,6 +2,9 @@ local M = {}
 
 -- taken from https://alpha2phi.medium.com/neovim-for-beginners-packer-manager-plugin-e4d84d4c3451
 function M.setup(servers, options)
+  -- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+  require('neodev').setup {}
+
   local lspconfig = require 'lspconfig'
 
   require('mason').setup {

@@ -14,16 +14,18 @@ local function keymappings(client, bufnr)
 
   -- Whichkey
   local keymap_l = {
-    d = { vim.diagnostic.open_float, 'Line Diagnostics' },
+    i = { vim.diagnostic.open_float, 'Line Diagnostics' },
+    d = { '<cmd>TroubleToggle document_diagnostics<cr>', 'Buffer Diagnostics' },
+    a = { '<cmd>Lspsaga code_action<cr>', 'Code Action' },
     l = {
       name = 'Code',
-      r = { vim.lsp.buf.rename, 'Rename' },
-      a = { vim.lsp.buf.code_action, 'Code Action' },
-      i = { '<cmd>LspInfo<CR>', 'Lsp Info' },
+      r = { '<cmd>Lspsaga rename<cr>', 'Rename' },
+      i = { '<cmd>LspInfo<cr>', 'Lsp Info' },
     },
   }
+
   if client.server_capabilities.documentFormattingProvider then
-    keymap_l.l.f = { vim.lsp.buf.formatting, 'Format Document' }
+    keymap_l.l.F = { vim.lsp.buf.formatting, 'Format Document' }
   end
 
   local keymap_g = {
@@ -33,7 +35,7 @@ local function keymappings(client, bufnr)
     s = { vim.lsp.buf.signature_help, 'Signature Help' },
     I = { vim.lsp.buf.implementation, 'Goto Implementation' },
     t = { vim.lsp.buf.type_definition, 'Goto Type Definition' },
-    r = { require('telescope.builtin').lsp_references, 'Goto References' },
+    r = { '<cmd>Trouble lsp_references<cr>', 'Trouble References' },
   }
   whichkey.register(keymap_l, { buffer = bufnr, prefix = '<leader>' })
   whichkey.register(keymap_g, { buffer = bufnr, prefix = 'g' })

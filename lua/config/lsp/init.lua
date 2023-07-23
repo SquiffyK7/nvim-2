@@ -8,6 +8,8 @@ local servers = {
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
           version = 'LuaJIT',
+          -- Setup your lua path
+          path = vim.split(package.path, ";"),
         },
         diagnostics = {
           -- Get the language server to recognize the `vim` global
@@ -29,19 +31,15 @@ local servers = {
   tsserver = {},
 }
 
-function M.setup()
-	local lsp_signature = require 'lsp_signature'
-	lsp_signature.setup {
-		bind = true,
-		handler_opts = {
-			border = 'rounded',
-		},
-	}
 
-	local capabilities = require('cmp_nvim_lsp').default_capabilities()
-	local opts = {
-		capabilities = capabilities,
-	}
+function M.setup()
+	-- Setup LSP handlers
+	require('config.lsp.handlers').setup()
+
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  local opts = {
+    capabilities = capabilities,
+  }
 
   require('config.lsp.installer').setup(servers, opts)
 

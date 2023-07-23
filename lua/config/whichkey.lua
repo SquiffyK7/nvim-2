@@ -66,6 +66,11 @@ function M.setup()
       },
       s = { '<cmd>Telescope repo list<cr>', 'Search' },
     },
+
+		v = {
+			name = 'Vim',
+			p = { ':lua print(vim.inspect())<Left><Left>', 'Pretty print'}
+		}
   }
 
   whichkey.setup(conf)

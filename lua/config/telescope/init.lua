@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
   local telescope = require 'telescope'
+  local trouble = require 'trouble.providers.telescope'
   local actions = require 'config.telescope.actions'
   local preview_maker = require 'config.telescope.preview_maker'
 
@@ -9,7 +10,12 @@ function M.setup()
     defaults = {
       buffer_previewer_maker = preview_maker,
       mappings = {
-        i = {},
+        n = {
+          ['<c-q>'] = trouble.open_with_trouble,
+        },
+        i = {
+          ['<c-q>'] = trouble.open_with_trouble,
+        },
       },
     },
 

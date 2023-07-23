@@ -171,20 +171,20 @@ function M.setup()
       config = function()
         require('config.telescope').setup()
       end,
-			requires = {
-				"nvim-lua/popup.nvim",
-				"nvim-lua/plenary.nvim",
-				{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-				"nvim-telescope/telescope-project.nvim",
-				"cljoly/telescope-repo.nvim",
-				"nvim-telescope/telescope-file-browser.nvim",
-				{
-					"ahmedkhalf/project.nvim",
-					config = function()
-						require("project_nvim").setup {}
-					end,
-				},
-			},
+      requires = {
+        'nvim-lua/popup.nvim',
+        'nvim-lua/plenary.nvim',
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+        'nvim-telescope/telescope-project.nvim',
+        'cljoly/telescope-repo.nvim',
+        'nvim-telescope/telescope-file-browser.nvim',
+        {
+          'ahmedkhalf/project.nvim',
+          config = function()
+            require('project_nvim').setup {}
+          end,
+        },
+      },
     }
 
     -- Buffer line
@@ -243,7 +243,7 @@ function M.setup()
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
-        'ray-x/lsp_signature.nvim',
+        'folke/neodev.nvim',
       },
     }
 
@@ -261,10 +261,8 @@ function M.setup()
           'ray-x/cmp-treesitter',
           'hrsh7th/cmp-cmdline',
           'saadparwaiz1/cmp_luasnip',
-          'hrsh7th/cmp-calc',
-          'f3fora/cmp-spell',
-          'hrsh7th/cmp-emoji',
           'hrsh7th/cmp-nvim-lsp',
+          'hrsh7th/cmp-nvim-lsp-signature-help',
           'L3MON4D3/LuaSnip',
           wants = 'friendly-snippets',
           config = function()
@@ -274,6 +272,32 @@ function M.setup()
         'rafamadriz/friendly-snippets',
       },
     }
+
+    -- trouble.nvim
+    use {
+      'folke/trouble.nvim',
+      event = 'BufReadPre',
+      cmd = { 'TroubleToggle', 'Trouble' },
+      module = 'trouble',
+      config = function()
+        require('trouble').setup {
+          use_diagnostic_signs = true,
+          auto_close = true,
+        }
+      end,
+      requires = 'nvim-tree/nvim-web-devicons',
+    }
+
+    -- lspsaga.nvim
+    use {
+      'tami5/lspsaga.nvim',
+      event = 'VimEnter',
+      cmd = { 'Lspsaga' },
+      config = function()
+        require('lspsaga').setup {}
+      end,
+    }
+
     if packer_bootstrap then
       print 'Restart Neovim required after installation!'
       require('packer').sync()

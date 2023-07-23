@@ -2,7 +2,7 @@ local M = {}
 
 function M.find_files()
   require('telescope.builtin').find_files {
-    find_command = { 'fd', '--hidden' },
+    find_command = { 'fd', '--hidden', '--type', 'file' },
     file_ignore_patterns = { '.git/' },
   }
 end
