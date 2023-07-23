@@ -75,6 +75,14 @@ function M.setup()
 				require('config.neogit').setup()
 			end,
 		}
+		use {
+			'lewis6991/gitsigns.nvim',
+			event = 'BufReadPre',
+			requires = { 'nvim-lua/plenary.nvim' },
+			config = function()
+				require('config.gitsigns').setup()
+			end,
+		}
 
 		-- WhichKey
 		use {

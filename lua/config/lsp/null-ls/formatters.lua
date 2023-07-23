@@ -30,7 +30,8 @@ function M.setup(client, bufnr)
 	if M.has_formatter(filetype) then
 		enable = client.name == 'null-ls'
 	else
-		enable = not (client.name == 'null-ls')
+		enable = not (client.name == 'null-ls' or client.name == 'tsserver')
+
 	end
 
 	if not enable then
