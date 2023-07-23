@@ -215,6 +215,15 @@ function M.setup()
 			end,
 		}
 
+		use 'tpope/vim-surround'
+
+		use {
+			'gbprod/cutlass.nvim',
+			config = function()
+				require('cutlass').setup { cut_key = 'm' }
+			end,
+		}
+
 		-- Auto pairs
 		use {
 			'windwp/nvim-autopairs',
