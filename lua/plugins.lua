@@ -83,6 +83,22 @@ function M.setup()
 				require('config.gitsigns').setup()
 			end,
 		}
+		use {
+			'sindrets/diffview.nvim',
+			requires = 'nvim-lua/plenary.nvim',
+			cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose' },
+			config = function()
+				local actions = require 'diffview.actions'
+				require('diffview').setup {
+					keymaps = {
+						file_panel = {
+							['<c-u>'] = actions.scroll_view(-0.25), -- Scroll the view up
+							['<c-d>'] = actions.scroll_view(0.25),  -- Scroll the view down
+						},
+					},
+				}
+			end,
+		}
 
 		-- WhichKey
 		use {
