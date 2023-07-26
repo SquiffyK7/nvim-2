@@ -17,9 +17,9 @@ function M.t(str)
 end
 
 function M.log(msg, hl, name)
-  name = name or "Neovim"
-  hl = hl or "Todo"
-  vim.api.nvim_echo({ { name .. ": ", hl }, { msg } }, true, {})
+  name = name or 'Neovim'
+  hl = hl or 'Todo'
+  vim.api.nvim_echo({ { name .. ': ', hl }, { msg } }, true, {})
 end
 
 function M.warn(msg, name)
@@ -35,4 +35,3 @@ function M.info(msg, name)
 end
 
 return M
-
