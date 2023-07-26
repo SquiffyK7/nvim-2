@@ -29,7 +29,6 @@ opt.fillchars:append 'diff:╱'
 opt.expandtab = true -- Insert space characters on <tab>
 opt.tabstop = 2      -- Set tab space to 2
 opt.shiftwidth = 2   -- Set tab space to 2
-
 opt.background = 'light'
 
 -- Highlight on yank

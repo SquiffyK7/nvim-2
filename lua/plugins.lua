@@ -57,6 +57,15 @@ function M.setup()
         -- vim.cmd 'colorscheme everforest'
       end,
     }
+    use {
+      'navarasu/onedark.nvim',
+      config = function()
+        require('onedark').setup {
+          style = 'darker',
+        }
+        require('onedark').load()
+      end,
+    }
 
     -- Startup screen
     use {
