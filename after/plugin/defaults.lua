@@ -8,15 +8,15 @@ g.mapleader = ' '
 g.maplocalleader = ' '
 
 opt.termguicolors = true      -- Enable colors in terminal
-opt.hlsearch = true           --Set highlight on search
-opt.number = true             --Make line numbers default
-opt.relativenumber = true     --Make relative number default
-opt.mouse = 'a'               --Enable mouse mode
-opt.breakindent = true        --Enable break indent
-opt.undofile = true           --Save undo history
-opt.ignorecase = true         --Case insensitive searching unless /C or capital in search
+opt.hlsearch = true           -- Set highlight on search
+opt.number = true             -- Make line numbers default
+opt.relativenumber = true     -- Make relative number default
+opt.mouse = 'a'               -- Enable mouse mode
+opt.breakindent = true        -- Enable break indent
+opt.undofile = true           -- Save undo history
+opt.ignorecase = true         -- Case insensitive searching unless /C or capital in search
 opt.smartcase = true          -- Smart case
-opt.updatetime = 250          --Decrease update time
+opt.updatetime = 250          -- Decrease update time
 opt.signcolumn = 'yes'        -- Always show sign column
 opt.clipboard = 'unnamedplus' -- Access system clipboard
 opt.timeoutlen = 300          -- Time in milliseconds to wait for a mapped sequence to complete.
@@ -26,6 +26,11 @@ opt.path:append '**'
 opt.wildignorecase = true
 opt.wildignore:append '**/node_modules/*'
 opt.fillchars:append 'diff:╱'
+opt.expandtab = true -- Insert space characters on <tab>
+opt.tabstop = 2      -- Set tab space to 2
+opt.shiftwidth = 2   -- Set tab space to 2
+
+opt.background = 'light'
 
 -- Highlight on yank
 vim.cmd [[
