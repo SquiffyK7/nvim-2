@@ -10,6 +10,7 @@ function M.setup()
       adaptive_size = true,
     },
     filters = {
+      git_ignored = false,
       custom = { '.git' },
     },
     update_cwd = true,
