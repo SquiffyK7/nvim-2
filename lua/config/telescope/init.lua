@@ -4,11 +4,9 @@ function M.setup()
   local telescope = require 'telescope'
   local trouble = require 'trouble.providers.telescope'
   local actions = require 'config.telescope.actions'
-  local preview_maker = require 'config.telescope.preview_maker'
 
   telescope.setup {
     defaults = {
-      buffer_previewer_maker = preview_maker,
       mappings = {
         n = {
           ['<c-q>'] = trouble.open_with_trouble,
