@@ -61,7 +61,11 @@ function M.setup()
       'navarasu/onedark.nvim',
       config = function()
         require('onedark').setup {
-          style = 'darker',
+          style = 'light',
+          highlights = {
+            ['NvimTreeNormal'] = { bg = 'bg0' },
+            ['NvimTreeEndOfBuffer'] = { bg = 'bg0' },
+          },
         }
         require('onedark').load()
       end,
