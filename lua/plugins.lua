@@ -131,7 +131,7 @@ function M.setup()
       opt = true,
       keys = { 'gc', 'gcc', 'gbc' },
       config = function()
-        require('Comment').setup {}
+        require('Comment').setup()
       end,
     }
 
@@ -229,15 +229,12 @@ function M.setup()
     use {
       'unblevable/quick-scope',
       config = function()
-        -- disable in quickfix mode
         vim.cmd [[
 					let g:qs_filetype_blacklist = ['qf', 'Trouble']
 				]]
       end,
     }
-
     use 'tpope/vim-surround'
-    use 'chaoren/vim-wordmotion'
 
     use {
       'gbprod/cutlass.nvim',
