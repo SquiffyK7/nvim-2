@@ -5,16 +5,16 @@ function M.setup()
 
   local conf = {
     window = {
-      border = 'single', -- none, single, double, shadow
+      border = 'single',   -- none, single, double, shadow
       position = 'bottom', -- bottom, top
     },
   }
 
   local opts = {
-    mode = 'n', -- Normal mode
+    mode = 'n',     -- Normal mode
     prefix = '<leader>',
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
+    buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+    silent = true,  -- use `silent` when creating keymaps
     noremap = true, -- use `noremap` when creating keymaps
     nowait = false, -- use `nowait` when creating keymaps
   }
@@ -41,9 +41,9 @@ function M.setup()
     g = {
       name = 'Git',
       s = { '<cmd>Neogit<CR>', 'Status' },
-      d = { '<cmd>DiffviewOpen<cr>', 'Diff View Open' },
-      L = { '<cmd>DiffviewFileHistory<cr>', 'Branch History' },
-      l = { '<cmd>DiffviewFileHistory %<cr>', 'File History' },
+      d = { require('utils.diffview').diffview_open, 'Diff View Open' },
+      L = { require('utils.diffview').diffview_branch_history, 'Branch History' },
+      l = { require('utils.diffview').diffview_file_history, 'File History' },
     },
 
     f = {
