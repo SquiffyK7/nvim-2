@@ -68,6 +68,9 @@ function M.setup()
           },
         }
         require('onedark').load()
+
+        -- Set Podfile syntax highlighting for ruby
+        vim.cmd 'autocmd BufNewFile,BufRead Podfile,*.podspec set filetype=ruby'
       end,
     }
 
@@ -287,6 +290,7 @@ function M.setup()
             require('fidget').setup {}
           end,
         },
+        'b0o/schemastore.nvim',
       },
     }
 
