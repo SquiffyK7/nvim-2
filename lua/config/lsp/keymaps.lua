@@ -32,7 +32,7 @@ local function keymappings(client, bufnr)
     name = 'Goto',
     d = { require('telescope.builtin').lsp_definitions, 'Definition' },
     s = { vim.lsp.buf.signature_help, 'Signature Help' },
-    I = { vim.lsp.buf.implementation, 'Goto Implementation' },
+    I = { '<cmd>Trouble lsp_implementations<cr>', 'Goto Implementation' },
     t = { vim.lsp.buf.type_definition, 'Goto Type Definition' },
     r = { '<cmd>Trouble lsp_references<cr>', 'Trouble References' },
   }
