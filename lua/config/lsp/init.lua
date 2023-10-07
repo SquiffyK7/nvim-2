@@ -28,7 +28,6 @@ local servers = {
       },
     },
   },
-  tsserver = {},
   eslint = {
     on_attach = function(client, bufnr)
       vim.api.nvim_create_autocmd('BufWritePre', {
@@ -71,6 +70,7 @@ function M.setup()
 
   require('config.lsp.null-ls').setup(opts)
   require('config.lsp.installer').setup(servers, opts)
+  require('config.lsp.tsserver').setup()
 
   -- Use LspAttach autocommand to only map the following keys
   -- after the language server attaches to the current buffer

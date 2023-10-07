@@ -291,6 +291,7 @@ function M.setup()
           end,
         },
         'b0o/schemastore.nvim',
+        'jose-elias-alvarez/typescript.nvim',
       },
     }
 

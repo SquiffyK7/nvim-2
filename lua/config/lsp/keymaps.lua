@@ -25,13 +25,12 @@ local function keymappings(client, bufnr)
   }
 
   if client.server_capabilities.documentFormattingProvider then
-    keymap_l.l.F = { vim.lsp.buf.formatting, 'Format Document' }
+    keymap_l.l.F = { vim.lsp.buf.format, 'Format Document' }
   end
 
   local keymap_g = {
     name = 'Goto',
     d = { require('telescope.builtin').lsp_definitions, 'Definition' },
-    D = { vim.lsp.buf.declaration, 'Declaration' },
     s = { vim.lsp.buf.signature_help, 'Signature Help' },
     I = { vim.lsp.buf.implementation, 'Goto Implementation' },
     t = { vim.lsp.buf.type_definition, 'Goto Type Definition' },
