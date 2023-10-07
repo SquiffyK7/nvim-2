@@ -56,7 +56,7 @@ function M.setup()
       c = { '<cmd>Telescope commands<cr>', 'Commands' },
       r = { '<cmd>Telescope file_browser<cr>', 'Browser' },
       w = { '<cmd>Telescope current_buffer_fuzzy_find<cr>', 'Current Buffer' },
-      e = { '<cmd>NvimTreeToggle<cr>', 'Explorer' },
+      e = { '<cmd>NvimTreeOpen<cr>', 'Explorer' },
     },
 
     p = {
