@@ -8,8 +8,8 @@ function M.setup()
       fallback = false,       -- fall back to standard LSP definition on failure
     },
     server = {                -- pass options to lspconfig's setup method
-      on_attach = function(client, bufnr)
-        require('config.lsp.tsserver.keymaps').setup(client, bufnr)
+      on_attach = function(bufnr)
+        require('config.lsp.tsserver.keymaps').setup(bufnr)
       end,
     },
   }

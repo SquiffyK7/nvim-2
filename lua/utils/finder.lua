@@ -1,10 +1,10 @@
 local M = {}
 
-function M.find_files()
-  require('telescope.builtin').find_files {
+function M.find_files(opts)
+  require('telescope.builtin').find_files(vim.tbl_deep_extend('force', opts or {}, {
     find_command = { 'fd', '--hidden', '--type', 'file' },
     file_ignore_patterns = { '.git/' },
-  }
+  }))
 end
 
 -- Find dotfiles

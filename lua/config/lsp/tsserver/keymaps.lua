@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup(client, bufnr)
+function M.setup(bufnr)
   local whichkey = require 'which-key'
   local typescript = require 'typescript'
 
