@@ -134,7 +134,9 @@ function M.setup()
       opt = true,
       keys = { 'gc', 'gcc', 'gbc' },
       config = function()
-        require('Comment').setup()
+        require('Comment').setup {
+          pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+        }
       end,
     }
 
@@ -177,7 +179,6 @@ function M.setup()
       requires = {
         'kyazdani42/nvim-web-devicons',
       },
-      cmd = { 'NvimTreeOpen'},
       config = function()
         require('config.nvimtree').setup()
       end,
@@ -267,6 +268,12 @@ function M.setup()
     -- End wise
     use {
       'RRethy/nvim-treesitter-endwise',
+      requires = 'nvim-treesitter/nvim-treesitter',
+      after = 'nvim-treesitter',
+    }
+
+    use {
+      'JoosepAlviste/nvim-ts-context-commentstring',
       requires = 'nvim-treesitter/nvim-treesitter',
       after = 'nvim-treesitter',
     }
