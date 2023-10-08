@@ -229,6 +229,8 @@ function M.setup()
       end,
     }
 
+    use 'famiu/bufdelete.nvim'
+
     -- Motion
     use {
       'unblevable/quick-scope',
