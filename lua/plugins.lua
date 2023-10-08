@@ -60,17 +60,7 @@ function M.setup()
     use {
       'navarasu/onedark.nvim',
       config = function()
-        require('onedark').setup {
-          style = 'light',
-          highlights = {
-            ['NvimTreeNormal'] = { bg = 'bg0' },
-            ['NvimTreeEndOfBuffer'] = { bg = 'bg0' },
-          },
-        }
-        require('onedark').load()
-
-        -- Set Podfile syntax highlighting for ruby
-        vim.cmd 'autocmd BufNewFile,BufRead Podfile,*.podspec set filetype=ruby'
+        require('config.onedark').setup()
       end,
     }
 
@@ -92,20 +82,24 @@ function M.setup()
       end,
     }
     use {
-      'lewis6991/gitsigns.nvim',
-      event = 'BufReadPre',
-      requires = { 'nvim-lua/plenary.nvim' },
-      config = function()
-        require('config.gitsigns').setup()
-      end,
-    }
-    use {
       'sindrets/diffview.nvim',
       requires = 'nvim-lua/plenary.nvim',
       cmd = { 'DiffviewOpen', 'DiffviewFileHistory', 'DiffviewClose' },
       config = function()
         require('config.diffview').setup()
       end,
+    }
+
+    use {
+      'petertriho/nvim-scrollbar',
+      config = function()
+        require('config.nvimscrollbar').setup()
+      end,
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'lewis6991/gitsigns.nvim',
+        'kevinhwang91/nvim-hlslens',
+      },
     }
 
     -- WhichKey
