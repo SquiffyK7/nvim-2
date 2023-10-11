@@ -22,18 +22,18 @@ keymap('v', '>', '>gv', default_opts)
 keymap('v', 'p', '"_dP', default_opts)
 
 -- Switch buffer
-keymap('n', '<S-h>', ':bprevious<CR>', default_opts)
-keymap('n', '<S-l>', ':bnext<CR>', default_opts)
+keymap('n', '<S-h>', '<cmd>bprevious<cr>', default_opts)
+keymap('n', '<S-l>', '<cmd>bnext<cr>', default_opts)
 
 -- Cancel search highlighting with ESC
-keymap('n', '<ESC>', ':nohlsearch<Bar>:echo<CR>', default_opts)
+keymap('n', '<ESC>', '<cmd>nohlsearch<Bar>:echo<cr>', default_opts)
 
 -- Move selected line / block of text in visual mode
-keymap('x', 'K', ":move '<-2<CR>gv-gv", default_opts)
-keymap('x', 'J', ":move '>+1<CR>gv-gv", default_opts)
+keymap('x', 'K', "<cmd>move '<-2<cr>gv-gv", default_opts)
+keymap('x', 'J', "<cmd>move '>+1<cr>gv-gv", default_opts)
 
 -- Resizing panes
-keymap('n', '<Left>', ':vertical resize +1<CR>', default_opts)
-keymap('n', '<Right>', ':vertical resize -1<CR>', default_opts)
-keymap('n', '<Up>', ':resize -1<CR>', default_opts)
-keymap('n', '<Down>', ':resize +1<CR>', default_opts)
+keymap('n', '<Left>', '<cmd>vertical resize +1<cr>', default_opts)
+keymap('n', '<Right>', '<cmd>vertical resize -1<cr>', default_opts)
+keymap('n', '<Up>', '<cmd>resize -1<cr>', default_opts)
+keymap('n', '<Down>', '<cmd>resize +1<cr>', default_opts)

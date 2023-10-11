@@ -125,7 +125,6 @@ function M.setup()
     -- Better Comment
     use {
       'numToStr/Comment.nvim',
-      opt = true,
       keys = { 'gc', 'gcc', 'gbc' },
       config = function()
         require('Comment').setup {
@@ -349,6 +348,22 @@ function M.setup()
       cmd = { 'Lspsaga' },
       config = function()
         require('lspsaga').setup {}
+      end,
+    }
+
+    -- Debugging
+    use {
+      'mfussenegger/nvim-dap',
+      event = 'BufReadPre',
+      module = { 'dap' },
+      requires = {
+        'theHamsta/nvim-dap-virtual-text',                       -- UI extension for nvim-dap
+        'rcarriga/nvim-dap-ui',                                  -- UI extension for nvim-dap
+        'nvim-telescope/telescope-dap.nvim',                     -- UI extension for nvim-dap
+        { 'jbyuki/one-small-step-for-vimkind', module = 'osv' }, -- debug adapter for debugging luacode
+      },
+      config = function()
+        require('config.dap').setup()
       end,
     }
 

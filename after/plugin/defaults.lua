@@ -9,6 +9,7 @@ g.maplocalleader = ' '
 
 opt.termguicolors = true      -- Enable colors in terminal
 opt.hlsearch = true           -- Set highlight on search
+opt.incsearch = true          -- Show search matches while typing search query
 opt.number = true             -- Make line numbers default
 opt.relativenumber = true     -- Make relative number default
 opt.mouse = 'a'               -- Enable mouse mode

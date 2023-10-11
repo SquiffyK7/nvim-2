@@ -20,12 +20,13 @@ function M.setup()
   }
 
   local mappings = {
-    ['w'] = { '<cmd>update!<cr>', 'Save' },
-    ['q'] = { '<cmd>q!<cr>', 'Quit' },
+    w = { '<cmd>update!<cr>', 'Save' },
+    q = { '<cmd>q!<cr>', 'Quit' },
 
     b = {
       name = 'Buffer',
-      d = { '<Cmd>Bdelete<cr>', 'Close current buffer' },
+      d = { '<cmd>Bdelete<cr>', 'Close current buffer' },
+      D = { '<cmd>%bd|e#|bd#<cr>', 'Delete all buffers' },
     },
 
     z = {
